@@ -10,22 +10,22 @@ pipeline {
   stage('Prerequisite') {
    steps {
     sh "echo 'Creating gitea backup ...'"
-    sh "sudo mkdir -p ${WORKSPACE_TMP}"
-    sh "sudo mkdir -p ${WORKSPACE_TMP}/config/"
-    sh "sudo mkdir -p ${WORKSPACE_TMP}/data/"
+    sh "sudo mkdir -p ${WORKSPACE}/tmp"
+    sh "sudo mkdir -p ${WORKSPACE}/tmp/config/"
+    sh "sudo mkdir -p ${WORKSPACE}/tmp/data/"
    }
   }
   stage('Dump') {
    steps {
-    sh "sudo cp -f ${ini_config} ${WORKSPACE_TMP}/config/"
-    sh "sudo cp -rf ${data_path} ${WORKSPACE_TMP}/data/"
-    sh "sudo cd ${WORKSPACE_TMP}"
+    sh "sudo cp -f ${ini_config} ${WORKSPACE}/tmp/config/"
+    sh "sudo cp -rf ${data_path} ${WORKSPACE}/tmp/data/"
+    sh "sudo cd ${WORKSPACE}/tmp"
     sh "sudo zip -rq ${WORKSPACE}/gitea-\$(date '+%Y%m%d%H%M%S').zip *"
    }
   }
   stage('Cleanup') {
    steps {
-    sh "sudo rm -rfd ${WORKSPACE_TMP}"
+    sh "sudo rm -rfd ${WORKSPACE}/tmp"
     sh "sudo --user=root --group=root chown -R jenkins:jenkins ${WORKSPACE}"
     sh "echo 'Finished gitea backup.'"
    }
