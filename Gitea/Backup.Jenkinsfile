@@ -19,8 +19,7 @@ pipeline {
    steps {
     sh "sudo cp -f ${ini_config} ${WORKSPACE}/tmp/config/"
     sh "sudo cp -rf ${data_path} ${WORKSPACE}/tmp/data/"
-    sh "sudo cd ${WORKSPACE}/tmp"
-    sh "sudo zip -rq ${WORKSPACE}/gitea-\$(date '+%Y%m%d%H%M%S').zip *"
+    sh "sudo zip -rq ${WORKSPACE}/gitea-\$(date '+%Y%m%d%H%M%S').zip ${WORKSPACE}/tmp"
    }
   }
   stage('Cleanup') {
