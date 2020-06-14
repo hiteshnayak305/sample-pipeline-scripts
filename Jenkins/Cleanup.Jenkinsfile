@@ -6,7 +6,7 @@ pipeline {
    steps {
     sh """
         cd /var/lib/jenkins/plugins
-        rm *.bak
+        rm -f *.bak
     """
     sh "echo 'Finished cleaning'"
    }
