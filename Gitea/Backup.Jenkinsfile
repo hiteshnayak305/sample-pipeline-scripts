@@ -6,6 +6,10 @@ pipeline {
   string defaultValue: '/var/lib/gitea', description: 'gitea data path', name: 'data_path', trim: true
  }
 
+ options {
+    buildDiscarder(logRotator(numToKeepStr: '3'))
+ }
+
  stages {
   stage('Prerequisite') {
    steps {

@@ -5,6 +5,10 @@ pipeline {
   string defaultValue: '/etc/gitea/app.ini', description: 'app.ini path', name: 'ini_config', trim: true
  }
 
+ options {
+    buildDiscarder(logRotator(numToKeepStr: '3'))
+ }
+
  stages {
   stage('Prerequisite') {
    steps {
